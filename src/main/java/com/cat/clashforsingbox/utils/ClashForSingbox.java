@@ -13,7 +13,6 @@ public class ClashForSingbox {
     public void outFile() {
         // 输入和输出文件路径
         String clashConfigPath = "clash-config.json"; // Clash 配置文件路径
-        //String clashConfigPath =json.toJSONString() ;
         String singBoxConfigPath = "singbox-config.json"; // SingBox 配置文件路径
 
         try {
