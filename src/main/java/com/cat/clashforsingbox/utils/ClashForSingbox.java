@@ -4,21 +4,39 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.LoaderOptions;
+import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class ClashForSingbox {
 
     public void outFile() {
         // 输入和输出文件路径
-        String clashConfigPath = "clash-config.json"; // Clash 配置文件路径
+        String clashConfigPath = "clash.yaml"; // Clash 配置文件路径
         String singBoxConfigPath = "singbox-config.json"; // SingBox 配置文件路径
 
         try {
             // 读取 Clash 配置
+            // 使用 SnakeYAML 加载 YAML 文件
+            Yaml yaml = new Yaml();
+
+            // 读取 YAML 文件并将其转换为 Java 对象（Map 或 List）
+            FileReader reader = new FileReader(new File(clashConfigPath));
+
+            Object yamlObject = yaml.load(reader);
+
+            // 使用 Jackson 将 Java 对象转换为 JSON 字符串
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonContent = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(yamlObject);
+
+
             ObjectMapper mapper = new ObjectMapper();
-            JsonNode clashConfig = mapper.readTree(new File(clashConfigPath));
+            JsonNode clashConfig = mapper.readTree(jsonContent);
 
             // 转换为 SingBox 配置
             ObjectNode singBoxConfig = mapper.createObjectNode();
