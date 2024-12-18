@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //没写呢 慢慢来
 @Controller
 @RequestMapping("/api/conversion")
-public class CFSController {
+public class ConversionController {
 
     @PostMapping("/ClashConversionSingbox")
     public String CFS(){
