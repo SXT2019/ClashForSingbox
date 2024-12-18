@@ -34,7 +34,6 @@ public class ClashForSingbox {
             ObjectMapper objectMapper = new ObjectMapper();
             String jsonContent = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(yamlObject);
 
-
             ObjectMapper mapper = new ObjectMapper();
             JsonNode clashConfig = mapper.readTree(jsonContent);
 

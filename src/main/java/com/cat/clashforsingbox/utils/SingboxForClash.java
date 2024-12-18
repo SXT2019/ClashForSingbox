@@ -12,52 +12,6 @@ import java.util.Map;
 
 public class SingboxForClash {
 
-    private static ObjectNode convertToClashProxy(JsonNode singBoxProxy, ObjectMapper mapper) {
-        String type = singBoxProxy.get("type").asText();
-        ObjectNode clashProxy = mapper.createObjectNode();
-
-        switch (type) {
-            case "vmess":
-                clashProxy.put("type", "vmess");
-                clashProxy.put("name", singBoxProxy.get("tag").asText());
-                clashProxy.put("server", singBoxProxy.get("server").asText());
-                clashProxy.put("port", singBoxProxy.get("server_port").asInt());
-                clashProxy.put("uuid", singBoxProxy.get("uuid").asText());
-                clashProxy.put("alterId", singBoxProxy.get("alter_id").asInt());
-                clashProxy.put("cipher", singBoxProxy.get("cipher").asText());
-                return clashProxy;
-
-            case "trojan":
-                clashProxy.put("type", "trojan");
-                clashProxy.put("name", singBoxProxy.get("tag").asText());
-                clashProxy.put("server", singBoxProxy.get("server").asText());
-                clashProxy.put("port", singBoxProxy.get("server_port").asInt());
-                clashProxy.put("password", singBoxProxy.get("password").asText());
-                return clashProxy;
-
-            case "shadowsocks":
-                clashProxy.put("type", "shadowsocks");
-                clashProxy.put("name", singBoxProxy.get("tag").asText());
-                clashProxy.put("server", singBoxProxy.get("server").asText());
-                clashProxy.put("port", singBoxProxy.get("server_port").asInt());
-                clashProxy.put("password", singBoxProxy.get("password").asText());
-                clashProxy.put("cipher", singBoxProxy.get("method").asText());
-                return clashProxy;
-
-            case "hysteria2":
-                clashProxy.put("type", "hysteria2");
-                clashProxy.put("name", singBoxProxy.get("tag").asText());
-                clashProxy.put("server", singBoxProxy.get("server").asText());
-                clashProxy.put("port", singBoxProxy.get("server_port").asInt());
-                clashProxy.put("password", singBoxProxy.get("password").asText());
-                return clashProxy;
-
-            default:
-                System.out.println("不支持的代理类型：" + type);
-                return null;
-        }
-    }
-
     public void outFile(){
         // 输入和输出文件路径
         String singBoxConfigPath = "singbox-config.json"; // SingBox 配置文件路径
@@ -105,6 +59,52 @@ public class SingboxForClash {
             System.out.println("转换完成，输出文件：" + clashConfigPath);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static ObjectNode convertToClashProxy(JsonNode singBoxProxy, ObjectMapper mapper) {
+        String type = singBoxProxy.get("type").asText();
+        ObjectNode clashProxy = mapper.createObjectNode();
+
+        switch (type) {
+            case "vmess":
+                clashProxy.put("type", "vmess");
+                clashProxy.put("name", singBoxProxy.get("tag").asText());
+                clashProxy.put("server", singBoxProxy.get("server").asText());
+                clashProxy.put("port", singBoxProxy.get("server_port").asInt());
+                clashProxy.put("uuid", singBoxProxy.get("uuid").asText());
+                clashProxy.put("alterId", singBoxProxy.get("alter_id").asInt());
+                clashProxy.put("cipher", singBoxProxy.get("cipher").asText());
+                return clashProxy;
+
+            case "trojan":
+                clashProxy.put("type", "trojan");
+                clashProxy.put("name", singBoxProxy.get("tag").asText());
+                clashProxy.put("server", singBoxProxy.get("server").asText());
+                clashProxy.put("port", singBoxProxy.get("server_port").asInt());
+                clashProxy.put("password", singBoxProxy.get("password").asText());
+                return clashProxy;
+
+            case "shadowsocks":
+                clashProxy.put("type", "shadowsocks");
+                clashProxy.put("name", singBoxProxy.get("tag").asText());
+                clashProxy.put("server", singBoxProxy.get("server").asText());
+                clashProxy.put("port", singBoxProxy.get("server_port").asInt());
+                clashProxy.put("password", singBoxProxy.get("password").asText());
+                clashProxy.put("cipher", singBoxProxy.get("method").asText());
+                return clashProxy;
+
+            case "hysteria2":
+                clashProxy.put("type", "hysteria2");
+                clashProxy.put("name", singBoxProxy.get("tag").asText());
+                clashProxy.put("server", singBoxProxy.get("server").asText());
+                clashProxy.put("port", singBoxProxy.get("server_port").asInt());
+                clashProxy.put("password", singBoxProxy.get("password").asText());
+                return clashProxy;
+
+            default:
+                System.out.println("不支持的代理类型：" + type);
+                return null;
         }
     }
 }
