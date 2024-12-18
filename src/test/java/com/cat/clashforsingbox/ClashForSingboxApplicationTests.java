@@ -10,9 +10,6 @@ class ClashForSingboxApplicationTests {
 	@Test
 	void contextLoads() {
 
-        SingboxForClash singboxForClash = new SingboxForClash();
-        singboxForClash.outFile();
-
     }
 
 }
